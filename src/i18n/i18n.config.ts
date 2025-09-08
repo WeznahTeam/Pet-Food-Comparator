@@ -1,17 +1,17 @@
+import {FoodTranslationsEs, FoodTranslationsEn} from "./FoodTranslations";
+
 export default {
     lng: "es",
     fallbackLng: "en",
     resources: {
         es: {
             translation: {
-                saludo: "¡Hola, mundo!",
-                inicio: "Inicio"
+                ...FoodTranslationsEs
             }
         },
         en: {
             translation: {
-                saludo: "Hello, World!",
-                inicio: "Home"
+                ...FoodTranslationsEn
             }
         }
     },
