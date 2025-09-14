@@ -1,4 +1,5 @@
 import {FoodTranslationsEs, FoodTranslationsEn} from "./FoodTranslations";
+import {FoodFormTranslationsEn, FoodFormTranslationsEs} from "./FoodFormTranslations";
 
 export default {
     lng: "es",
@@ -6,12 +7,14 @@ export default {
     resources: {
         es: {
             translation: {
-                ...FoodTranslationsEs
+                FoodTranslations: FoodTranslationsEs,
+                FoodFormTranslations: FoodFormTranslationsEs
             }
         },
         en: {
             translation: {
-                ...FoodTranslationsEn
+                FoodTranslations: FoodTranslationsEn,
+                FoodFormTranslations: FoodFormTranslationsEn
             }
         }
     },
