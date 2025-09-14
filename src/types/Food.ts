@@ -5,7 +5,7 @@ export type Food = {
     name: string;
     price: number;
     currency: string;
-    type: 'Kibble' | 'WetFood' | 'Treat'
+    type: 'kibble' | 'wetFood' | 'treat'
     composition: Array<Component>
     additives: Array<Additive>
 }
