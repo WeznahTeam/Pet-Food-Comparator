@@ -10,12 +10,12 @@ import {
     TextField
 } from "@mui/material";
 import {Add, Delete} from "@mui/icons-material";
-import {ChangeEvent} from "react";
+import type {ChangeEvent} from "react";
 import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
 import type {Component} from "../../types/Food/Component";
 
-export function CompositionForm(props: { setCompositions, composition, onCompositionInputChange }) {
+export function CompositionForm(props: { setCompositions: any, composition: any, onCompositionInputChange: any }) {
     const {setCompositions, composition, onCompositionInputChange} = props
 
     const {t} = useTranslation();
@@ -23,20 +23,20 @@ export function CompositionForm(props: { setCompositions, composition, onComposi
     function createNewComponent() {
         const newComponent = {name: `new-${composition.length}`, quantity: 0}
 
-        setCompositions((prev) => [...prev, newComponent])
+        setCompositions((prev: any) => [...prev, newComponent])
     }
 
     return (
         <Grid container direction='column' width='100%' height='100%' alignItems='center'>
-            <h3>{t($ => $.FoodForm.componentTitle)}</h3>
+            <h3>{t('FoodForm.componentTitle')}</h3>
 
             <TableContainer sx={{maxHeight: 440}}>
                 <Table stickyHeader padding='none' size='small'>
                     <TableHead>
                         <TableRow>
-                            <TableCell padding='none'>{t($ => $.FoodForm.name)}</TableCell>
+                            <TableCell padding='none'>{t('FoodForm.name')}</TableCell>
 
-                            <TableCell padding='none'>{t($ => $.FoodForm.percent)}</TableCell>
+                            <TableCell padding='none'>{t('FoodForm.percent')}</TableCell>
 
                             <TableCell padding='none'>
                                 <IconButton
@@ -46,7 +46,7 @@ export function CompositionForm(props: { setCompositions, composition, onComposi
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {composition.map((component: Component, i) => (
+                        {composition.map((component: Component, i: number) => (
                             <TableRow key={i}>
                                 <TableCell padding='none'>
                                     <TextField
@@ -73,7 +73,7 @@ export function CompositionForm(props: { setCompositions, composition, onComposi
 
                                 <TableCell padding='none'>
                                     <IconButton
-                                        onClick={() => setCompositions((prev) => prev.filter((_, j) => j !== i))}
+                                        onClick={() => setCompositions((prev: any) => prev.filter((_: any, j: number) => j !== i))}
                                         children={<Delete/>}/>
                                 </TableCell>
                             </TableRow>
