@@ -1,5 +1,7 @@
-import {FoodTranslationsEs, FoodTranslationsEn} from "./FoodTranslations";
+import {FoodTranslationsEn, FoodTranslationsEs} from "./FoodTranslations";
 import {FoodFormTranslationsEn, FoodFormTranslationsEs} from "./FoodFormTranslations";
+import {FoodCardEs, FoodCardEn} from "./FoodCard";
+
 
 export default {
     lng: "es",
@@ -7,14 +9,16 @@ export default {
     resources: {
         es: {
             translation: {
-                FoodTranslations: FoodTranslationsEs,
-                FoodFormTranslations: FoodFormTranslationsEs
+                Food: FoodTranslationsEs,
+                FoodForm: FoodFormTranslationsEs,
+                FoodCard: FoodCardEs
             }
         },
         en: {
             translation: {
-                FoodTranslations: FoodTranslationsEn,
-                FoodFormTranslations: FoodFormTranslationsEn
+                Food: FoodTranslationsEn,
+                FoodForm: FoodFormTranslationsEn,
+                FoodCard: FoodCardEn
             }
         }
     },

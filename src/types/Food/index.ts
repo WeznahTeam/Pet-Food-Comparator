@@ -1,0 +1,6 @@
+export * from './Additive'
+export * from './Component'
+export * from './Food'
+export * from './Kinds/WetFood'
+export * from './Kinds/Treats'
+export * from './Kinds/Kibble'
