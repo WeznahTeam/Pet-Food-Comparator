@@ -13,7 +13,7 @@ import {Add, Delete} from "@mui/icons-material";
 import {ChangeEvent} from "react";
 import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
-import type {Component} from "../../types/Component";
+import type {Component} from "../../types/Food/Component";
 
 export function CompositionForm(props: { setCompositions, composition, onCompositionInputChange }) {
     const {setCompositions, composition, onCompositionInputChange} = props
@@ -28,15 +28,15 @@ export function CompositionForm(props: { setCompositions, composition, onComposi
 
     return (
         <Grid container direction='column' width='100%' height='100%' alignItems='center'>
-            <h3>{t($ => $.FoodFormTranslations.componentTitle)}</h3>
+            <h3>{t($ => $.FoodForm.componentTitle)}</h3>
 
             <TableContainer sx={{maxHeight: 440}}>
                 <Table stickyHeader padding='none' size='small'>
                     <TableHead>
                         <TableRow>
-                            <TableCell padding='none'>{t($ => $.FoodFormTranslations.name)}</TableCell>
+                            <TableCell padding='none'>{t($ => $.FoodForm.name)}</TableCell>
 
-                            <TableCell padding='none'>{t($ => $.FoodFormTranslations.percent)}</TableCell>
+                            <TableCell padding='none'>{t($ => $.FoodForm.percent)}</TableCell>
 
                             <TableCell padding='none'>
                                 <IconButton

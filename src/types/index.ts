@@ -1,6 +1,0 @@
-export * from './Additive'
-export * from './Component'
-export * from './Food'
-export * from './WetFood'
-export * from './Treats'
-export * from './Kibble'

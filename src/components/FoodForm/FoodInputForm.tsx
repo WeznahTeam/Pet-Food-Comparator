@@ -23,7 +23,7 @@ export function FoodInputForm(props: FoodInputFormProps) {
             type={type || 'text'}
             onChange={onInputChange}
             value={value}
-            label={t($ => $.FoodFormTranslations[name])}
+            label={t($ => $.FoodForm[name])}
             size='small'
         />
     )

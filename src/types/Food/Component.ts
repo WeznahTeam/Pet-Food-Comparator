@@ -1,4 +1,4 @@
 export type Component = {
     name: string;
-    quantity: number
+    quantity: number // %
 }

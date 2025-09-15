@@ -3,7 +3,7 @@ import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
 import {ChangeEvent, useState} from "react";
 import {FoodTypes} from "../../constants/constants";
-import type {Additive, Component, Food} from "../../types";
+import type {Additive, Component, Food} from "../../types/Food/index";
 import {FoodInputForm} from "./FoodInputForm";
 import {CompositionForm} from "./CompositionForm";
 import {AdditiveForm} from "./AdditivesForm";
@@ -42,7 +42,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             // Create new reference to trigger refresh
             const newComposition = [...prev]
 
-            newComposition[i][event.target.name] = event.target.value
+            newComposition[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newComposition
         })
@@ -53,7 +53,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             // Create new reference to trigger refresh
             const newAdditives = [...prev]
 
-            newAdditives[i][event.target.name] = event.target.value
+            newAdditives[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newAdditives
         })
@@ -62,11 +62,11 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
     function compileAndRegisterFood() {
         const newFood: Food = {
             name,
-            price: Number.parseInt(price),
-            currency: 'euro',
             type,
-            composition: [],
-            additives: []
+            composition,
+            additives,
+            price: Number.parseInt(price),
+            currency: '€'
         }
 
         registerFood(newFood)
@@ -82,7 +82,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             justifyContent='center'
             alignItems='center'
         >
-            <h2>{t($ => $.FoodFormTranslations.title)}</h2>
+            <h2>{t($ => $.FoodForm.title)}</h2>
 
             <Grid container direction='column' width='100%' alignItems='center'>
                 <Grid container columnSpacing={20} justifyContent='center'>
@@ -99,7 +99,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                                     key={i}
                                     value={type}
                                     control={<Radio/>}
-                                    label={t($ => $.FoodFormTranslations[type])}/>
+                                    label={t($ => $.FoodForm[type])}/>
                             ))}
                     </RadioGroup>
                 </Grid>
@@ -120,7 +120,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                 </Grid>
             </Grid>
 
-            <Button fullWidth onClick={compileAndRegisterFood}>{t($ => $.FoodFormTranslations.register)}</Button>
+            <Button fullWidth onClick={compileAndRegisterFood}>{t($ => $.FoodForm.register)}</Button>
         </Grid>
     )
 }

@@ -13,7 +13,7 @@ import {Add, Delete} from "@mui/icons-material";
 import {ChangeEvent} from "react";
 import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
-import type {Component} from "../../types/Component";
+import type {Component} from "../../types/Food/Component";
 
 export function AdditiveForm(props: { setAdditives, additives, onAdditiveInputChange }) {
     const {setAdditives, additives, onAdditiveInputChange} = props
@@ -28,15 +28,15 @@ export function AdditiveForm(props: { setAdditives, additives, onAdditiveInputCh
 
     return (
         <Grid container direction='column' width='100%' height='100%' alignItems='center'>
-            <h3>{t($ => $.FoodFormTranslations.additivesTitle)}</h3>
+            <h3>{t($ => $.FoodForm.additivesTitle)}</h3>
 
             <TableContainer sx={{maxHeight: 440}}>
                 <Table stickyHeader padding='none' size='small'>
                     <TableHead>
                         <TableRow>
-                            <TableCell>{t($ => $.FoodFormTranslations.name)}</TableCell>
+                            <TableCell>{t($ => $.FoodForm.name)}</TableCell>
 
-                            <TableCell>{t($ => $.FoodFormTranslations.quantity)} (mg)</TableCell>
+                            <TableCell>{t($ => $.FoodForm.quantity)} (mg)</TableCell>
 
                             <TableCell>
                                 <IconButton
@@ -55,7 +55,7 @@ export function AdditiveForm(props: { setAdditives, additives, onAdditiveInputCh
                                         margin='dense'
                                         onChange={(event: ChangeEvent) => onAdditiveInputChange(event, i)}
                                         value={additive.name}
-                                        label={t($ => $.FoodFormTranslations.type)}
+                                        label={t($ => $.FoodForm.type)}
                                         name='name'
                                     />
                                 </TableCell>
@@ -67,7 +67,7 @@ export function AdditiveForm(props: { setAdditives, additives, onAdditiveInputCh
                                         margin='dense'
                                         onChange={(event: ChangeEvent) => onAdditiveInputChange(event, i)}
                                         value={additive.quantity}
-                                        label={t($ => $.FoodFormTranslations.type)}
+                                        label={t($ => $.FoodForm.type)}
                                         name='quantity'
                                         type='number'
                                     />
