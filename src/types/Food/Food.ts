@@ -1,5 +1,5 @@
-import {Component} from "./Component";
-import {Additive} from "./Additive";
+import type {Component} from "./Component";
+import type {Additive} from "./Additive";
 
 export type Food = {
     name: string;

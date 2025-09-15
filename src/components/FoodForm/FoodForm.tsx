@@ -1,7 +1,8 @@
 import {Button, FormControlLabel, Grid, Radio, RadioGroup} from "@mui/material";
 import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
-import {ChangeEvent, useState} from "react";
+import type {ChangeEvent} from "react";
+import {useState} from "react";
 import {FoodTypes} from "../../constants/constants";
 import type {Additive, Component, Food} from "../../types/Food/index";
 import {FoodInputForm} from "./FoodInputForm";
@@ -12,7 +13,7 @@ export interface FoodFormProps {
     registerFood: (newFood: Food) => void
 }
 
-export function FoodForm(props: FoodFormProps): JSX.Element {
+export function FoodForm(props: FoodFormProps) {
     const {registerFood} = props
 
     const {t} = useTranslation();
@@ -27,7 +28,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
 
     const [additives, setAdditives] = useState<Array<Additive>>([])
 
-    const foodSetters = {
+    const foodSetters: any = {
         name: setName,
         price: setPrice,
         type: setType,
@@ -40,20 +41,20 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
     function onCompositionInputChange(event: ChangeEvent<any>, i: number) {
         setComposition(prev => {
             // Create new reference to trigger refresh
-            const newComposition = [...prev]
+            const newComposition: any = [...prev]
 
-            newComposition[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
+            newComposition[i][event.target.name as keyof Component] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newComposition
         })
     }
 
-    function onAdditivesInputChange(event: ChangeEvent<any>, i: number) {
+    function onAdditivesInputChange(event: any, i: number) {
         setAdditives(prev => {
             // Create new reference to trigger refresh
-            const newAdditives = [...prev]
+            const newAdditives: any = [...prev]
 
-            newAdditives[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
+            newAdditives[i][event.target.name as keyof Additive] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newAdditives
         })
@@ -82,7 +83,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             justifyContent='center'
             alignItems='center'
         >
-            <h2>{t($ => $.FoodForm.title)}</h2>
+            <h2>{t('FoodForm.title')}</h2>
 
             <Grid container direction='column' width='100%' alignItems='center'>
                 <Grid container columnSpacing={20} justifyContent='center'>
@@ -99,7 +100,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                                     key={i}
                                     value={type}
                                     control={<Radio/>}
-                                    label={t($ => $.FoodForm[type])}/>
+                                    label={t(`FoodForm.${type}`)}/>
                             ))}
                     </RadioGroup>
                 </Grid>
@@ -120,7 +121,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                 </Grid>
             </Grid>
 
-            <Button fullWidth onClick={compileAndRegisterFood}>{t($ => $.FoodForm.register)}</Button>
+            <Button fullWidth onClick={compileAndRegisterFood}>{t(`FoodForm.register`)}</Button>
         </Grid>
     )
 }

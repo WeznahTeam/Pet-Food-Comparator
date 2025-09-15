@@ -1,6 +1,6 @@
 import {TextField} from "@mui/material";
 import '../../i18n/i18n'
-import {ChangeEvent} from "react";
+import type {ChangeEvent} from "react";
 import {useTranslation} from "react-i18next";
 
 export interface FoodInputFormProps {
@@ -23,7 +23,7 @@ export function FoodInputForm(props: FoodInputFormProps) {
             type={type || 'text'}
             onChange={onInputChange}
             value={value}
-            label={t($ => $.FoodForm[name])}
+            label={t(`FoodForm.${name}`)}
             size='small'
         />
     )

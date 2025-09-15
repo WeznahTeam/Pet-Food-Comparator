@@ -1,7 +1,7 @@
 import type {Component} from "../../../types/Food/Component";
 import {PieChart} from "@mui/x-charts/PieChart";
 import {useEffect, useState} from "react";
-import type {PieValueType} from "@mui/x-charts/models/seriesType/pie";
+import type {PieValueType} from "@mui/x-charts";
 
 export function CompositionPieChart(props: { composition: Array<Component> }) {
     const {composition} = props
