@@ -1,25 +1,27 @@
 import {Button, FormControlLabel, Grid, Radio, RadioGroup} from "@mui/material";
 import '../../i18n/i18n'
 import {useTranslation} from "react-i18next";
-import {ChangeEvent, useState} from "react";
+import type {ChangeEvent} from "react";
+import {useState} from "react";
 import {FoodTypes} from "../../constants/constants";
-import type {Additive, Component, Food} from "../../types/Food/index";
+import type {Additive, Component, Food} from "../../types/Food";
 import {FoodInputForm} from "./FoodInputForm";
 import {CompositionForm} from "./CompositionForm";
 import {AdditiveForm} from "./AdditivesForm";
+import {FoodValidation} from "../../validations/Food/FoodValidation";
 
 export interface FoodFormProps {
     registerFood: (newFood: Food) => void
 }
 
-export function FoodForm(props: FoodFormProps): JSX.Element {
+export function FoodForm(props: FoodFormProps) {
     const {registerFood} = props
 
     const {t} = useTranslation();
 
     const [name, setName] = useState('')
 
-    const [price, setPrice] = useState('')
+    const [price, setPrice] = useState(0)
 
     const [type, setType] = useState<'kibble' | 'wetFood' | 'treat'>(FoodTypes[0])
 
@@ -27,7 +29,9 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
 
     const [additives, setAdditives] = useState<Array<Additive>>([])
 
-    const foodSetters = {
+    const [errorMsg, setErrorMsg] = useState<string | undefined>()
+
+    const foodSetters: any = {
         name: setName,
         price: setPrice,
         type: setType,
@@ -40,7 +44,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
     function onCompositionInputChange(event: ChangeEvent<any>, i: number) {
         setComposition(prev => {
             // Create new reference to trigger refresh
-            const newComposition = [...prev]
+            const newComposition: any = [...prev]
 
             newComposition[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
@@ -51,12 +55,24 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
     function onAdditivesInputChange(event: ChangeEvent<any>, i: number) {
         setAdditives(prev => {
             // Create new reference to trigger refresh
-            const newAdditives = [...prev]
+            const newAdditives: any = [...prev]
 
             newAdditives[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newAdditives
         })
+    }
+
+    function canRegisterFood(food: Food) {
+        try {
+            FoodValidation.validateSync(food)
+        } catch (e: any) {
+            setErrorMsg(e.message)
+
+            return false
+        }
+
+        return true
     }
 
     function compileAndRegisterFood() {
@@ -65,11 +81,11 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             type,
             composition,
             additives,
-            price: Number.parseInt(price),
+            price: price ? price : 0,
             currency: '€'
         }
 
-        registerFood(newFood)
+        canRegisterFood(newFood) ? registerFood(newFood) : undefined
     }
 
     return (
@@ -82,14 +98,14 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
             justifyContent='center'
             alignItems='center'
         >
-            <h2>{t($ => $.FoodForm.title)}</h2>
+            <h2>{t('FoodForm.title')}</h2>
 
             <Grid container direction='column' width='100%' alignItems='center'>
                 <Grid container columnSpacing={20} justifyContent='center'>
                     <Grid container direction='column' height='100%' justifyContent='space-around'>
                         <FoodInputForm name='name' onInputChange={onInputChange} value={name}/>
 
-                        <FoodInputForm name='price' onInputChange={onInputChange} value={price}/>
+                        <FoodInputForm type='number' name='price' onInputChange={onInputChange} value={price}/>
                     </Grid>
 
                     <RadioGroup value={type} name='type' onChange={onInputChange}>
@@ -99,7 +115,7 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                                     key={i}
                                     value={type}
                                     control={<Radio/>}
-                                    label={t($ => $.FoodForm[type])}/>
+                                    label={t(`FoodForm.${type}`)}/>
                             ))}
                     </RadioGroup>
                 </Grid>
@@ -120,7 +136,9 @@ export function FoodForm(props: FoodFormProps): JSX.Element {
                 </Grid>
             </Grid>
 
-            <Button fullWidth onClick={compileAndRegisterFood}>{t($ => $.FoodForm.register)}</Button>
+            <Button fullWidth onClick={compileAndRegisterFood}>{t(`FoodForm.register`)}</Button>
+
+            <p>{errorMsg}</p>
         </Grid>
     )
 }
