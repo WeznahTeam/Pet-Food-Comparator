@@ -11,7 +11,7 @@ export function FoodCard(props: { food?: Food }) {
     const {t} = useTranslation();
 
     if (!food) {
-        return <p>{t($ => $.FoodCard.NoFoodError)}</p>
+        return <p>{t('FoodCard.NoFoodError')}</p>
     }
 
     return (
@@ -22,14 +22,14 @@ export function FoodCard(props: { food?: Food }) {
 
             <Grid container width='100%' justifyContent='space-around' alignItems='center'>
                 <Grid>
-                    <h3>{t($ => $.FoodCard.composition)}</h3>
+                    <h3>{t('FoodCard.composition')}</h3>
 
                     <CompositionPieChart composition={food.composition}/>
                 </Grid>
 
 
                 <Grid>
-                    <h3>{t($ => $.FoodCard.additives)}</h3>
+                    <h3>{t('FoodCard.additives')}</h3>
 
                     <AdditivesPieChart additives={food.additives}/>
                 </Grid>

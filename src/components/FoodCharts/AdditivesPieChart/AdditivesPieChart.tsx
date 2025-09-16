@@ -1,6 +1,6 @@
 import {PieChart} from "@mui/x-charts/PieChart";
 import {useEffect, useState} from "react";
-import type {PieValueType} from "@mui/x-charts/models/seriesType/pie";
+import type {PieValueType} from "@mui/x-charts";
 import type {Additive} from "../../../types/Food/Additive";
 
 export function AdditivesPieChart(props: { additives: Array<Additive> }) {

@@ -46,18 +46,18 @@ export function FoodForm(props: FoodFormProps) {
             // Create new reference to trigger refresh
             const newComposition: any = [...prev]
 
-            newComposition[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
+            newComposition[i][event.target.name as keyof Component] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newComposition
         })
     }
 
-    function onAdditivesInputChange(event: ChangeEvent<any>, i: number) {
+    function onAdditivesInputChange(event: any, i: number) {
         setAdditives(prev => {
             // Create new reference to trigger refresh
             const newAdditives: any = [...prev]
 
-            newAdditives[i][event.target.name] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
+            newAdditives[i][event.target.name as keyof Additive] = event.target.name !== 'quantity' ? event.target.value : Number.parseInt(event.target.value)
 
             return newAdditives
         })
